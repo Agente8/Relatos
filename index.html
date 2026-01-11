@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatos para la Próxima Humanidad - Javier Ochoa</title>
+
+  <!-- Social preview (cuando compartes el enlace) -->
+  <meta property="og:title" content="Relatos para la Próxima Humanidad" />
+  <meta property="og:description" content="Historias cortas sobre la IA y nosotros. No va de la tecnología, va de lo que nos pasa." />
+  <meta property="og:image" content="assets/Portada.jpg" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 2rem;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .book-cover { position: relative; animation: float 6s ease-in-out infinite; }
+
+    .book-cover img {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 255, 255, 0.3);
+      transition: transform 0.3s ease;
+      display: block;
+    }
+
+    .book-cover img:hover { transform: scale(1.02); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero-text .author {
+      font-size: 1.5rem;
+      color: #a0aec0;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      color: #e2e8f0;
+      margin-bottom: 2rem;
+      font-style: italic;
+      border-left: 4px solid #667eea;
+      padding-left: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid #667eea;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(102, 126, 234, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-section {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 4rem;
+      margin: 3rem auto;
+    }
+
+    .about-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .quote-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .quote-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-5px);
+      border-color: #667eea;
+    }
+
+    .quote-card p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #e2e8f0;
+      font-style: italic;
+    }
+
+    .ritual-section {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+      border-radius: 20px;
+      padding: 3rem;
+      margin: 3rem 0;
+      border: 2px solid rgba(102, 126, 234, 0.3);
+    }
+
+    .ritual-section h3 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #667eea;
+    }
+
+    .ritual-steps {
+      list-style: none;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .ritual-steps li {
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      border-left: 4px solid #667eea;
+      font-size: 1.2rem;
+    }
+
+    .preview-section { text-align: center; margin: 4rem 0; }
+
+    .preview-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .preview-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .preview-images img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      display: block;
+    }
+
+    .preview-images img:hover { transform: scale(1.05); }
+
+    .buy-section {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 20px;
+      margin: 3rem 0;
+    }
+
+    .buy-section h2 { font-size: 2.5rem; margin-bottom: 2rem; }
+
+    .buy-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #a0aec0;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; }
+      .hero-text h1 { font-size: 2.5rem; }
+      .book-cover img { max-width: 300px; margin: 0 auto; }
+      .about-section { padding: 2rem; }
+      .cta-buttons { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+
+    .pulse { animation: pulse 2s ease-in-out infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="book-cover">
+        <img id="portada" src="assets/portada.jpg" alt="Relatos para la Próxima Humanidad - Portada" />
+      </div>
+
+      <div class="hero-text">
+        <h1>Relatos para la Próxima Humanidad</h1>
+        <p class="author">Javier Ochoa</p>
+
+        <div class="tagline">
+          "No es para leer horas, es para quedarte pensando."
+        </div>
+
+        <p style="font-size: 1.1rem; color: #cbd5e0; margin-bottom: 1rem;">
+          Historias cortas sobre la IA y nosotros. No va de la tecnología, va de lo que nos pasa.
+        </p>
+
+        <div class="cta-buttons">
+          <a href="#download" class="btn btn-primary pulse">Descargar Capítulo Gratis</a>
+          <a href="#comprar" class="btn btn-secondary">Comprar Ahora</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="about-section">
+      <h2>Un viaje donde la curiosidad pesa más que la certeza</h2>
+      <p style="font-size: 1.2rem; text-align: center; max-width: 800px; margin: 0 auto; color: #e2e8f0;">
+        En estas páginas se abre un territorio donde la imaginación se cruza con un porvenir que ya empieza a respirarnos en la nuca.
+        Las historias que conforman este volumen no se detienen al inicio de un futuro lejano, al contrario, avanzan hacia él como quien
+        empuja una puerta entreabierta para asomarse a lo que podrá ser dentro de años o décadas.
+      </p>
+    </div>
+
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <p>"No es para leer horas, es para quedarte pensando."</p>
+      </div>
+      <div class="quote-card">
+        <p>"Son historias cortas sobre la IA y nosotros. No va de la tecnología, va de lo que nos pasa."</p>
+      </div>
+    </div>
+
+    <div class="ritual-section">
+      <h3>🌙 Ritual Recomendado</h3>
+      <ul class="ritual-steps">
+        <li>Elegir un momento tranquilo</li>
+        <li>Leer una sola historia</li>
+        <li>No empezar la siguiente</li>
+        <li>Dejar que la idea haga su trabajo</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section preview-section" id="download">
+    <h2>Lee las Primeras Páginas</h2>
+    <p style="font-size: 1.2rem; color: #cbd5e0; margin-bottom: 2rem;">
+      Descubre cómo comienza el viaje. Descarga el primer capítulo gratis.
+    </p>
+
+    <div class="preview-images">
+      <img id="contraportada" src="assets/contraportada.jpg" alt="Contraportada del libro" />
+      <img id="primeras-lineas" src="assets/primeras-lineas.jpg" alt="Primeras líneas del libro" />
+    </div>
+
+    <!-- Si no tienes el PDF aún, comenta este <a> y te pongo un fallback -->
+    <a class="btn btn-primary" style="margin-top: 2rem; font-size: 1.2rem;" href="assets/capitulo-1.pdf" download>
+      📖 Descargar Primer Capítulo (PDF)
+    </a>
+  </section>
+
+  <section class="section buy-section" id="comprar">
+    <h2>Consigue tu Ejemplar</h2>
+    <p style="font-size: 1.2rem; color: #cbd5e0; margin-bottom: 1rem;">
+      Disponible en tus librerías favoritas
+    </p>
+
+    <div class="buy-buttons">
+      <a href="https://www.casadellibro.com/libro-relatos-para-la-proxima-humanidad/9791370350949/17855518"
+         target="_blank" rel="noopener"
+         class="btn btn-primary" style="font-size: 1.2rem;">
+        📚 Comprar en Casa del Libro
+      </a>
+
+      <a href="https://amzn.eu/d/2p6i3nv"
+         target="_blank" rel="noopener"
+         class="btn btn-primary" style="font-size: 1.2rem;">
+        📦 Comprar en Amazon
+      </a>
+    </div>
+
+    <p style="margin-top: 2rem; color: #a0aec0;">
+      Publicado por <strong>Círculo Rojo Editorial</strong>
+    </p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Javier Ochoa. Todos los derechos reservados.</p>
+    <p style="margin-top: 0.5rem;">Para todos los públicos que les guste imaginar.</p>
+  </footer>
+
+  <script>
+    // Smooth scroll para los enlaces
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>
