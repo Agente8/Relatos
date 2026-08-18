@@ -23,8 +23,7 @@
       <article class="card relato-card reveal" style="--delay:${index * 70}ms">
         <span class="eyebrow">Relato ${String(index + 1).padStart(2, '0')}</span>
         <h3>${relato.title}</h3>
-        <p>${relato.pregunta}</p>
-        <p><strong>Tema:</strong> ${relato.tema}</p>
+        <p>${SITE_CONTENT.relatoTemplate.pregunta}</p>
         <a class="text-link" href="relatos/${relato.slug}.html">Abrir ficha docente</a>
       </article>
     `).join('');
@@ -38,33 +37,21 @@
     });
   }
 
-
-  function renderAudience() {
-    const courses = $('#courses-list');
-    const subjects = $('#subjects-list');
-    const skills = $('#skills-list');
-    if (courses) courses.innerHTML = SITE_CONTENT.destinatarios.cursos.map((item) => `<li>${item}</li>`).join('');
-    if (subjects) subjects.innerHTML = SITE_CONTENT.destinatarios.materias.map((item) => `<li>${item}</li>`).join('');
-    if (skills) skills.innerHTML = SITE_CONTENT.destinatarios.competencias.map((item) => `<li>${item}</li>`).join('');
-  }
-
   function renderRelatoPage() {
     const page = $('[data-relato-slug]');
     if (!page) return;
     const slug = page.dataset.relatoSlug;
     const relato = SITE_CONTENT.relatos.find((item) => item.slug === slug);
     if (!relato) return;
+    const template = SITE_CONTENT.relatoTemplate;
     document.title = `${relato.title} · ${SITE_CONTENT.book.title}`;
     $('#relato-title').textContent = relato.title;
-    $('#relato-question').textContent = relato.pregunta;
-    $('#relato-theme').textContent = relato.tema;
-    $('#relato-idea').textContent = relato.idea;
-    $('#relato-antes').textContent = relato.antes;
-    $('#relato-durante').textContent = relato.durante;
-    $('#relato-objetivos').innerHTML = relato.objetivos.map((item) => `<li>${item}</li>`).join('');
-    $('#relato-debate').innerHTML = relato.debate.map((item) => `<li>${item}</li>`).join('');
-    $('#relato-actividad').textContent = relato.actividad;
-    $('#relato-recursos').innerHTML = relato.recursosIA.map((item) => `<li>${item}</li>`).join('');
+    $('#relato-question').textContent = template.pregunta;
+    $('#relato-idea').textContent = template.idea;
+    $('#relato-objetivos').innerHTML = template.objetivos.map((item) => `<li>${item}</li>`).join('');
+    $('#relato-debate').innerHTML = template.debate.map((item) => `<li>${item}</li>`).join('');
+    $('#relato-actividad').textContent = template.actividad;
+    $('#relato-recursos').innerHTML = template.recursosIA.map((item) => `<li>${item}</li>`).join('');
   }
 
   function setupMenu() {
@@ -101,7 +88,6 @@
   renderNavigation();
   renderRelatoCards();
   renderLists();
-  renderAudience();
   renderRelatoPage();
   setupMenu();
   setupContact();
